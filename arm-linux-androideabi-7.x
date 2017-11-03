@@ -47,7 +47,7 @@ then
     make $MAKE_FLAGS clean &> /dev/null;
     make $MAKE_FLAGS distclean &> /dev/null;
 fi;
-export UBER_PATH=$DIR/out/arm-linux-androideabi-7.x;
+export UBER_PATH=$DIR/out/arm-linux-androideabi-7.x-$1;
 export PREFIX=--prefix=$UBER_PATH;
 if [ -d "$UBER_PATH" ];
 then
@@ -65,7 +65,7 @@ cp -R $UBERROOT_SRC_PATH -f $UBERROOT_DEST_PATH;
 export UBERROOT=--with-sysroot=$UBERROOT_DEST_PATH/arch-arm;
 
 # Build Configuration
-./configure $PREFIX $UBERROOT --host=x86_64-linux-gnu --build=x86_64-linux-gnu --target=arm-linux-androideabi --program-transform-name='s&^&arm-linux-androideabi-&' --with-gcc-version=UBER --with-pkgversion='UBERTC-7.x.x' --with-binutils-version=uber --with-gold-version=uber --with-gmp-version=uber --with-mpfr-version=uber --with-mpc-version=uber --with-cloog-version=uber --with-isl-version=uber --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --with-gxx-include-dir=$UBERROOT_DEST_PATH/c++ --enable-initfini-array --enable-gnu-indirect-function --enable-gold=default --enable-threads --enable-multilib --with-libexpat --with-python --with-gnu-ld --with-gnu-as --disable-werror --disable-shared --disable-option-checking --disable-bootstrap --disable-libsanitizer --disable-libgomp --quiet --enable-plugins --disable-gdb;
+./configure $PREFIX $UBERROOT --host=x86_64-linux-gnu --build=x86_64-linux-gnu --target=arm-linux-androideabi --program-transform-name='s&^&arm-linux-androideabi-&' --with-gcc-version=UBER --with-pkgversion='UberTC-7.x (optimized' --with-binutils-version=uber --with-gold-version=uber --with-gmp-version=uber --with-mpfr-version=uber --with-mpc-version=uber --with-cloog-version=uber --with-isl-version=uber --with-host-libstdcxx='-static-libgcc -Wl,-Bstatic,-lstdc++,-Bdynamic -lm' --with-gxx-include-dir=$UBERROOT_DEST_PATH/c++ --enable-initfini-array --enable-gnu-indirect-function --enable-gold=default --enable-threads --enable-multilib --with-libexpat --with-python --with-gnu-ld --with-gnu-as --disable-werror --disable-shared --disable-option-checking --disable-bootstrap --disable-libsanitizer --disable-libgomp --quiet --enable-plugins --disable-gdb --with-float=soft --with-fpu=neon-vfpv4 --with-tune=cortex-$1 --enable-plugins;
 
 echo ""
 echo "${bldblu}Building your UBER arm-linux-androideabi-7.x Toolchain!!!${txtrst}"
